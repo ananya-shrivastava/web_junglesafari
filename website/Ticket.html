@@ -1,0 +1,130 @@
+<html>
+<head>
+<script language="JavaScript" type="text/javascript">
+var d=new Date();
+var monthname=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
+var TODAY = monthname[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+
+function validate(){
+var radios = document.getElementsByName('thesis');
+var tarea=document.getElementById('ta');
+var tarea1=document.getElementById('ta1');
+var t_cost = document.getElementById('n1').value;
+for (var i = 0, length = radios.length; i < length; i++) {
+if (radios[i].checked) {
+tarea.innerHTML=radios[i].value+"\n";
+tarea1.innerHTML=radios[i].value*t_cost+"\n";
+break;
+}
+}
+
+
+}
+
+</script>
+	<style type="text/css">
+	body {
+	background:none repeat scroll 0 0 #d3d3d3;
+	background:#3D0A4B;
+	
+	font-size:100%;
+  font-family:"Open Sans",Arial,sans-serif;
+  color:#ffffff;
+  }
+	.dear {
+		align="center";
+
+	      }
+	.mytext {
+    width: 300px;
+    height:40px;
+}
+	.gear{
+		color:#ffffff;
+		}
+	.mytext1{
+		 background-color: #4CAF50; /* Green */
+    border-radius:6px;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+   
+		}
+	.mytext2{
+		width: 20px;
+                height:10px;
+
+		}
+	a:hover{
+		color:#ff7b29;
+
+}
+	</style>
+</head>
+<body>
+<div class="gear">
+<h1 >JUNGLE SAFARI</h1>
+</div>
+<b><script language="JavaScript" type="text/javascript">
+document.write(TODAY);
+</script></b>
+
+
+<?php
+if(isset($_POST['submit']))
+{
+$name=$_POST['name'];
+$color=$_POST['color'];
+if($name!="" && $color!="")
+{
+$query=mysql_query("insert into tb values('$name','$color')");
+if($query)
+{
+echo "Updated successfully!";
+}
+else
+{
+echo "there is a problem in Databse";
+}
+}
+else
+{
+echo "Please fill all details";
+}
+
+}
+else
+{
+?>
+
+<br />
+<br />
+
+<div class="dear">
+<form NAME="frmOne" method="post" action="index.php">
+ <input type="text" name="name" class="mytext" placeholder="Your Name" /><br /><br />
+ <input type="text" name="phone_no. " class="mytext" placeholder="Phone No." /><br /><br />
+ <input type="text" name="email_id: " class="mytext" placeholder="Email Address" /><br /><br />
+ <input type="text" name="no" id="n1" class="mytext" placeholder="Number of Visitors" /><br /><br />
+<INPUT TYPE="Radio" Name="thesis" Value="350" class="mytext2"  > Ac
+<INPUT TYPE="Radio" Name="thesis" Value="250" class="mytext2" > NON AC<br/><br />
+
+
+
+<INPUT TYPE="button" VALUE="Price " onClick="validate()" class="mytext1" ><br />
+Per Person cost:
+<TEXTFIELD id="ta"></textfield><br /><br />
+Total Cost: <TEXTFIELD id="ta1"></textfield><br/><br /> 
+   
+<input type="submit" name="submit" class="mytext1">          
+</form>
+</div>
+
+<?php
+}
+?>
+</body>
+</html>
